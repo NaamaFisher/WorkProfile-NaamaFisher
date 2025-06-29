@@ -1,5 +1,4 @@
-#from cgitb import handler
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, jsonify
 from os import environ
 from dbcontext import db_data, db_delete, db_add, health_check
 from person import Person
@@ -37,18 +36,15 @@ def add():
         return db_add(person)
     app.logger.error("Request body is empty")
     return Response(status=404)
+
 @app.route("/health")
 def health():
-    health_messages = []
     try:
         app.logger.info("Application is running")
-        health_messages.append("Application: Healthy")
+        return jsonify({"status": "Healthy"}), 200
     except Exception as e:
         app.logger.error(f"Application health check failed: {e}")
-        health_messages.append("Application: Not Healthy")
-    combined_health_status = "\\\\n".join(health_messages)
-    return combined_health_status
-
+        return jsonify({"status": "Unhealthy", "error": str(e)}), 503
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
