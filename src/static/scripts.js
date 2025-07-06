@@ -5,7 +5,8 @@
 function handlePersonClick(div, id) {
     const cssClass = div.className;
     if (cssClass === "person-disabled") { return; }
-    fetch(`${backend}/delete/${id}`, { method: "DELETE" })
+  
+    fetch(/delete/${id}, { method: "DELETE" })
         .then(res => {
             if (res.status === 200) {
                 const parent = div.parentElement;
