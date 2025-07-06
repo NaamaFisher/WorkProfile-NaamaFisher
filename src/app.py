@@ -39,12 +39,6 @@ def add():
 
 @app.route("/health")
 def health():
-    try:
-        app.logger.info("Application is running")
-        return jsonify({"status": "Healthy"}), 200
-    except Exception as e:
-        app.logger.error(f"Application health check failed: {e}")
-        return jsonify({"status": "Unhealthy", "error": str(e)}), 503
-
+    return "OK", 200
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)

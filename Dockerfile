@@ -12,9 +12,11 @@ WORKDIR /app
 
 COPY --from=builder /install /usr/local
 
-COPY static/ static/
-COPY templates/ templates/
-COPY app.py dbcontext.py person.py ./
+COPY src/static/ static/
+COPY src/templates/ templates/
+COPY src/app.py src/dbcontext.py src/person.py ./
+
+
 
 EXPOSE 5000
 CMD ["python3", "app.py"]

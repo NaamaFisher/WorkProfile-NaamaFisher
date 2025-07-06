@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: workprofile-service
+  labels:
+    app: workprofile
+spec:
+  type: NodePort  # אפשר גם ClusterIP אם זה מיועד רק לקלאסטר פנימי
+  selector:
+    app: workprofile
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30001  # אם רוצים לגשת מבחוץ, ב-Port הזה
