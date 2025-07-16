@@ -3,8 +3,9 @@ from os import environ
 from dbcontext import db_data, db_delete, db_add, health_check
 from person import Person
 import logging
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 app.logger.setLevel(logging.INFO)
 handler = logging.StreamHandler()
 handler.setLevel(logging.INFO)
@@ -32,7 +33,7 @@ def add():
     body = request.json
     if body is not None:
         app.logger.info("Request to add person with body: %s", body)
-        person = Person(0, body["firstName"], body["lastName"], body["age"], body["address"], body["workplace"])
+        person = Person(0, body["firstName"], body["lastName"], int(body["age"]), body["address"], body["workplace"])
         return db_add(person)
     app.logger.error("Request body is empty")
     return Response(status=404)

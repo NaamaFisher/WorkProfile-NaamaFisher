@@ -3,9 +3,10 @@ import mysql.connector
 from os import environ
 from person import Person
 from flask import Response
+from flask import jsonify
 
 db_user = environ.get('DB_USER')
-db_pass = environ.get('DB_PASS')
+db_pass = environ.get('DB_PASSWORD')
 db_host = environ.get('DB_HOST')
 db_name = environ.get('DB_NAME')
 
@@ -72,7 +73,7 @@ def db_add(person: Person) -> Response:
     if cnx.is_connected():
         cursor = cnx.cursor()
         try:
-            cursor.execute(f"INSERT INTO people (firstName, lastName, age, address, workplace) VALUES ('{person.first_name}', '{person.last_name}', {person.age}, '{person.address}', '{person.workplace}')")
+            cursor.execute(f"INSERT INTO people (firstname, lastname, age, address, workplace) VALUES ('{person.firstName}', '{person.lastName}', {person.age}, '{person.address}', '{person.workplace}')")
             cnx.commit()
             personId = cursor.lastrowid
         except:
@@ -81,7 +82,7 @@ def db_add(person: Person) -> Response:
             if cnx.is_connected():
                 cursor.close()
                 cnx.close()
-    return Response(status=status, response=str(personId))
+    return jsonify({"id": personId}), 200
 
 
 def health_check() -> bool:

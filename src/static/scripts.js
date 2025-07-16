@@ -5,8 +5,7 @@
 function handlePersonClick(div, id) {
     const cssClass = div.className;
     if (cssClass === "person-disabled") { return; }
-  
-    fetch(/delete/${id}, { method: "DELETE" })
+    fetch(`/delete/${id}`, { method: "DELETE" })
         .then(res => {
             if (res.status === 200) {
                 const parent = div.parentElement;
@@ -51,14 +50,14 @@ document.getElementById('addPersonForm').addEventListener('submit', function (ev
     const address = document.getElementById('address').value;
 
     // send put request with person object in body
-    fetch(`${backend}/add`, {
+    fetch("/add", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
             firstName,
-            lastName,
+            lastName, 
             age,
             workplace,
             address
@@ -66,7 +65,8 @@ document.getElementById('addPersonForm').addEventListener('submit', function (ev
     }).then(res => {
         if (res.status === 200) {
             // Add new person to the DOM
-            res.json().then(id => {
+            res.json().then(data => {
+                const id = data.id;
                 // Create new person div
                 const newPerson = document.createElement('div');
                 newPerson.className = "person";
@@ -84,11 +84,11 @@ document.getElementById('addPersonForm').addEventListener('submit', function (ev
 
                 // Create new person address p
                 const newPersonAddress = document.createElement('p');
-                newPersonAddress.innerHTML = `Address: ${workplace}`;
+                newPersonAddress.innerHTML = `Address: ${address}`;
 
                 // Create new person workplace div
                 const newPersonWorkplace = document.createElement('p');
-                newPersonWorkplace.innerHTML = `Workplace: ${address}`;
+                newPersonWorkplace.innerHTML = `Workplace: ${workplace}`;
 
                 // Append all new divs to the new person div
                 newPerson.appendChild(newPersonName);

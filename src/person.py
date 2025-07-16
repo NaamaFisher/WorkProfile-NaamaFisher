@@ -1,8 +1,8 @@
 class Person:
-    def __init__(self, id, first_name, last_name, age, address, workplace):
+    def __init__(self, id, firstname, lastname, age, address, workplace):
         self.id = id
-        self.first_name = first_name
-        self.last_name = last_name
+        self.firstname = firstname
+        self.lastname = lastname
         self.age = age
         self.address = address
         self.workplace = workplace
