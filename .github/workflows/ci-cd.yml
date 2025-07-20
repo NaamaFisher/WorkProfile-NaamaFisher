@@ -27,7 +27,10 @@ jobs:
         docker build -t $IMAGE_ID:latest .
 
     - name: Run container
-      run: docker run -d -p 5000:5000 --name app $IMAGE_ID:latest
+      run: |
+        IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+        IMAGE_ID=$(echo $IMAGE_ID | tr '[:upper:]' '[:lower:]')
+        docker run -d -p 5000:5000 --name app $IMAGE_ID:latest
 
     - name: Wait for container to be ready
       run: sleep 5
@@ -55,19 +58,3 @@ jobs:
 
     - name: Log in to GitHub Container Registry
       run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-    - name: Build image with GHCR tags
-      run: |
-        IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
-        IMAGE_ID=$(echo $IMAGE_ID | tr '[:upper:]' '[:lower:]')
-
-        docker build -t $IMAGE_ID:latest \
-                     -t $IMAGE_ID:${{ steps.version.outputs.sha_tag }} .
-
-    - name: Push image to GHCR
-      run: |
-        IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
-        IMAGE_ID=$(echo $IMAGE_ID | tr '[:upper:]' '[:lower:]')
-
-        docker push $IMAGE_ID:latest
-        docker push $IMAGE_ID:${{ steps.version.outputs.sha_tag }}
