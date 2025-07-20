@@ -6,7 +6,7 @@ from flask import Response
 from flask import jsonify
 
 db_user = environ.get('DB_USER')
-db_pass = environ.get('DB_PASSWORD')
+db_pass = environ.get('DB_PASS')
 db_host = environ.get('DB_HOST')
 db_name = environ.get('DB_NAME')
 
