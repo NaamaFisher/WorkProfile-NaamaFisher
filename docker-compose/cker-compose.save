@@ -1,0 +1,65 @@
+WARN[0000] 
+/root/WorkProfile_Friend/docker-compose/docker-compose.yml: 
+the attribute `version` is obsolete, it will be 
+ignored, please remove it to avoid potential 
+confusion [+] Running 3/3
+ ✔ Container nginx Remov...  0.0s ✔ Container 
+ workprofile Removed 0.0s ✔ Container db Removed 
+ 0.0s
+root@DESKTOP-IN2P6D4:~/WorkProfile_Friend/docker-compose# 
+docker-compose up --build WARN[0000] 
+/root/WorkProfile_Friend/docker-compose/docker-compose.yml: 
+the attribute `version` is obsolete, it will be 
+ignored, please remove it to avoid potential 
+confusion [+] Running 9/9
+ ✔ nginx Pulled                                     25.6s
+   ✔ 9824c27679d3 Already exists                     0.0s
+   ✔ a5585638209e Pull complete                      3.6s
+   ✔ fd372c3c84a2 Pull complete                      3.6s
+   ✔ 958a74d6a238 Pull complete                      3.6s
+   ✔ c1d2dc189e38 Pull complete                      3.8s
+   ✔ 828fa206d77b Pull complete                      3.8s
+   ✔ bdaad27fd04a Pull complete                      4.7s
+   ✔ f23865b38cc6 Pull complete                     20.9s
+Compose can now delegate builds to bake for better performance.
+ To do so, set COMPOSE_BAKE=true.
+[+] Building 118.9s (16/16) FINISHED       docker:default
+ => [workprofile internal] load build definition fr  0.0s
+ => => transferring dockerfile: 584B                 0.0s
+ => [workprofile internal] load metadata for docker  3.5s
+ => [workprofile internal] load .dockerignore        0.0s
+ => => transferring context: 2B                      0.0s
+ => CACHED [workprofile builder 1/5] FROM docker.io  0.0s
+ => [workprofile internal] load build context        0.0s
+ => => transferring context: 17.03kB                 0.0s
+ => CACHED [workprofile stage-1 2/6] WORKDIR /app    0.0s
+ => [workprofile builder 2/5] WORKDIR /install       0.1s
+ => [workprofile builder 3/5] RUN apt-get update &  75.5s
+ => [workprofile builder 4/5] COPY requirements.txt  0.0s
+ => [workprofile builder 5/5] RUN pip install --no  38.6s
+ => [workprofile stage-1 3/6] COPY --from=builder /  0.2s
+ => [workprofile stage-1 4/6] COPY src/static/ stat  0.0s
+ => [workprofile stage-1 5/6] COPY src/templates/ t  0.0s
+ => [workprofile stage-1 6/6] COPY src/app.py src/d  0.0s
+ => [workprofile] exporting to image                 0.4s
+ => => exporting layers                              0.4s
+ => => writing image sha256:75c9237e04189aab4c8c99e  0.0s
+ => => naming to docker.io/library/docker-compose-w  0.0s
+ => [workprofile] resolving provenance for metadata  0.0s
+[+] Running 2/3
+ ✔ workprofile                                 Built 0.0s
+[+] Running 4/5er-compose_workprofile-network  Created0.1s
+ ✔ workprofile                                 Built 0.0s
+ ✔ Network docker-compose_workprofile-network  Created0.1s
+[+] Running 6/6er-compose_nginx-network        Created0.0s
+ ✔ workprofile                                 Built 0.0s
+ ✔ Network docker-compose_workprofile-network  Created0.1s
+ ✔ Network docker-compose_nginx-network        Created0.0s
+ ✔ Container mysql-db                          Created0.1s
+ ✔ Container workprofile-app                   Created0.1s
+ ✔ Container workprofile-nginx                 Created0.0s
+Attaching to mysql-db, workprofile-app, workprofile-nginx
+Gracefully stopping... (press Ctrl+C again to force)
+Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint mysql-db (653b5a78d8b909890f53e2233aded28992b7a949e2c538d42f5520cd56fc82a4): Bind for 0.0.0.0:3307 failed: port is already allocated
+root@DESKTOP-IN2P6D4:~/WorkProfile_Friend/docker-compose# 
+

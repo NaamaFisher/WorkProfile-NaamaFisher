@@ -51,7 +51,7 @@ document.getElementById('addPersonForm').addEventListener('submit', function (ev
 
     // send put request with person object in body
     fetch("/add", {
-        method: "PUT",
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },

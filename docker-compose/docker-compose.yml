@@ -48,12 +48,12 @@ services:
       MYSQL_USER: flaskapp
       MYSQL_PASSWORD: flaskapp
     ports:
-      - "3307:3306"
+      - "3310:3306"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - mysql-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pflaskapp"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpassword123"]
       interval: 10s
       timeout: 5s
       retries: 10
