@@ -24,7 +24,7 @@ jobs:
         run: |
           test -f Dockerfile && echo "✓ Dockerfile exists"
           test -f requirements.txt && echo "✓ requirements.txt exists"
-          test -f app.py && echo "✓ app.py exists"
+          test -f src/app.py && echo "✓ app.py exists"
 
       - name: Validate Python dependencies
         run: |
