@@ -45,13 +45,17 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3
 
+      - name: Prepare IMAGE_ID lowercase
+        id: prep_image_id
+        run: echo "IMAGE_ID_LOWER=$(echo $IMAGE_ID | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
       - name: Build Docker image
         run: |
-          docker build -t $IMAGE_ID:latest .
+          docker build -t ${{ steps.prep_image_id.outputs.IMAGE_ID_LOWER }}:latest .
 
       - name: Run container
         run: |
-          docker run -d -p 5000:5000 --name app $IMAGE_ID:latest
+          docker run -d -p 5000:5000 --name app ${{ steps.prep_image_id.outputs.IMAGE_ID_LOWER }}:latest
 
       - name: Wait for container to be ready
         run: sleep 10
@@ -108,14 +112,18 @@ jobs:
         id: version
         run: echo "sha_tag=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
+      - name: Prepare IMAGE_ID lowercase
+        id: prep_image_id
+        run: echo "IMAGE_ID_LOWER=$(echo $IMAGE_ID | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
 
       - name: Build and Push Docker image
         run: |
-          docker build -t $IMAGE_ID:latest -t $IMAGE_ID:${{ steps.version.outputs.sha_tag }} .
-          docker push $IMAGE_ID:latest
-          docker push $IMAGE_ID:${{ steps.version.outputs.sha_tag }}
+          docker build -t ${{ steps.prep_image_id.outputs.IMAGE_ID_LOWER }}:latest -t ${{ steps.prep_image_id.outputs.IMAGE_ID_LOWER }}:${{ steps.version.outputs.sha_tag }} .
+          docker push ${{ steps.prep_image_id.outputs.IMAGE_ID_LOWER }}:latest
+          docker push ${{ steps.prep_image_id.outputs.IMAGE_ID_LOWER }}:${{ steps.version.outputs.sha_tag }}
 
   stage5-kubernetes-kind:
     runs-on: ubuntu-latest
