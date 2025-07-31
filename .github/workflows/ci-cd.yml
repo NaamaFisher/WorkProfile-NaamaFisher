@@ -82,7 +82,7 @@ jobs:
 
       - name: Run 3-tier stack with Docker Compose
         working-directory: docker-compose
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Wait for services to start
         run: sleep 90
@@ -95,7 +95,7 @@ jobs:
 
       - name: Shutdown Docker Compose
         working-directory: docker-compose
-        run: docker-compose down -v
+        run: docker compose down -v
 
   stage4-publish:
     runs-on: ubuntu-latest
