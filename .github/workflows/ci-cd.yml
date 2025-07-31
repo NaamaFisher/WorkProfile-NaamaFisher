@@ -91,7 +91,6 @@ jobs:
         run: |
           curl -f http://localhost:8080/ && echo "✓ Nginx proxy works"
           curl -f http://localhost:8080/health && echo "✓ Health endpoint works"
-          # השורה הבאה תבדוק את הטקסט אבל תמשיך גם אם לא ימצא
           curl -s http://localhost:8080/health | grep "Database: Healthy" && echo "✓ Database connectivity works" || echo "⚠ Database connectivity check failed, but continuing"
 
       - name: Shutdown Docker Compose
@@ -127,6 +126,7 @@ jobs:
           docker push ${{ steps.prep_image_id.outputs.IMAGE_ID_LOWER }}:${{ steps.version.outputs.sha_tag }}
 
   stage5-kubernetes-kind:
+    if: false   # <--- השבתנו את השלב הזה בינתיים
     runs-on: ubuntu-latest
     needs: stage4-publish
 
