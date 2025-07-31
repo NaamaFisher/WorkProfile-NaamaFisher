@@ -26,6 +26,9 @@ jobs:
           test -f requirements.txt && echo "✓ requirements.txt exists"
           test -f src/app.py && echo "✓ app.py exists"
 
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
       - name: Validate Python dependencies
         run: |
           python3 -c "import flask; print('✓ Flask import successful')"
