@@ -10,7 +10,8 @@ WorkProfile is a production-ready multi-tier web application built with Flask an
 
 # Three-tier Architecture
 
-![docker-compose WorkProfile](images/docker-compose.png)
+<img width="948" height="376" alt="image" src="https://github.com/user-attachments/assets/1787ea6b-f204-4fe1-89e0-641c5bdf9f31" />
+
 
 ### Components
 
@@ -159,8 +160,10 @@ To deploy manually on Killercoda environment:
     ```
 
 **Screenshot of Killercoda Deployment Terminal**  
-![Screenshot of Killercoda](images/Screenshot%20of%20Killercoda%20Deployment%20Terminal.png)  
-![Screenshot of Killercoda](images/Screenshot%20of%20Killercoda%20Deployment%20Terminal%201.png)
+<img width="1919" height="1078" alt="image" src="https://github.com/user-attachments/assets/f5c47097-60a5-4479-bb1a-2b74e42edfe8" />
+
+<img width="1920" height="1058" alt="image" src="https://github.com/user-attachments/assets/e9b038d1-a8fd-43a5-9262-8622f28f1069" />
+
 
 ---
 
