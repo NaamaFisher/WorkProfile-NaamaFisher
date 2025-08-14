@@ -166,6 +166,9 @@ To deploy manually on Killercoda environment:
 
 <img width="1920" height="543" alt="צילום מסך 2025-08-14 151501" src="https://github.com/user-attachments/assets/a0e4b651-6068-44c7-a57e-96aebacb436d" />
 
+<img width="1920" height="1073" alt="צילום מסך 2025-08-14 152425" src="https://github.com/user-attachments/assets/9cb038eb-315f-497c-8b63-5643fd65f8f6" />
+
+
 
 
 ---
